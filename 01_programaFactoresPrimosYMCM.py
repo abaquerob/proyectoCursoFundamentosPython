@@ -2,7 +2,8 @@
 # Python3 program to calculate 
 # least common multiple (LCM) of 
 # a n integers given on the screen
-# 2 <= n <= 10 
+# 2 <= n <= 10. The integers can be 
+# positive or negative.
 
 import itertools 
 options = (2,3,4,5,6,7,8,9,10)
@@ -11,6 +12,7 @@ while True:
   print("*" * 10)
   print('Program to calculate \nleast common multiple (LCM) of') 
   print('n integers given on the screen \n2 <= n <= 10')
+  print('The integers can be positive or \nnegative.')
   print('n and each integer are requested \nindividually on the screen.')	
   amount_numbers = int(input("Enter the value of n: "))
   if not amount_numbers in options:
@@ -19,12 +21,20 @@ while True:
   
   list_numbers=[]
   tuple_numbers={}
-  
+
+  #The integers that will be taken into 
+  #account to calculate the LCM are requested 
+  #and value0 is calculated, a value that will 
+  #determine the sign of the LCM value
+  value0 = 1
   for i in range(amount_numbers):
     template = "Enter value #{}: ".format(i+1)
-    value = [int(input(template))]
+    value1 = int(input(template))
+    value = [value1]
     list_numbers.append(value)
-  #print("list_numbers", list_numbers)
+    value0 = value0 * value1
+  
+  print("list_numbers", list_numbers)
   tuple_numbers = tuple(list_numbers)
   
   # Initializes the 10 integers 
@@ -33,7 +43,7 @@ while True:
   #print("." * 10)
   
   A = list_numbers[0] 
-  B = list_numbers[1]  
+  B = list_numbers[1]
   C = list_numbers[2] 
   D = list_numbers[3]
   E = list_numbers[4]
@@ -42,7 +52,18 @@ while True:
   H = list_numbers[7]  
   I = list_numbers[8] 
   J = list_numbers[9]    
-  
+ 
+  A = [abs(aux) for aux in A]
+  B = [abs(aux) for aux in B]
+  C = [abs(aux) for aux in C]
+  D = [abs(aux) for aux in D]
+  E = [abs(aux) for aux in E]
+  F = [abs(aux) for aux in F]
+  G = [abs(aux) for aux in G]
+  H = [abs(aux) for aux in H]
+  I = [abs(aux) for aux in I]
+  J = [abs(aux) for aux in J]
+
   # calculates the prime factors iterating over 
   # the 10 lists and until all are exhausted
   co = 2
@@ -91,6 +112,8 @@ while True:
   while i < len(list_factors):
       prod = prod * list_factors[i]
       i += 1
-  if (amount_numbers > 1): 
-    print("LCM: ", prod)
+  if (value0 < 0):
+    prod = -1*prod    
+  if (amount_numbers > 1):     
+    print("LCM: ", prod)     
     break
